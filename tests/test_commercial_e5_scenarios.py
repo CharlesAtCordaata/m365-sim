@@ -11,11 +11,16 @@ Tests:
 - Fixture inheritance from greenfield
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -43,8 +48,8 @@ def mock_server_e5_hardened():
 
     # Start subprocess with commercial-e5 hardened scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--cloud", "commercial-e5", "--scenario", "hardened", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--cloud", "commercial-e5", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -92,8 +97,8 @@ def mock_server_e5_partial():
 
     # Start subprocess with commercial-e5 partial scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--cloud", "commercial-e5", "--scenario", "partial", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--cloud", "commercial-e5", "--scenario", "partial", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

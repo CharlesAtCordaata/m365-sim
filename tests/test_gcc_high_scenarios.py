@@ -7,11 +7,16 @@ Tests:
 - URL verification: all responses use graph.microsoft.us URLs
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -40,7 +45,7 @@ def mock_server_gcc_high_hardened():
     # Start subprocess with GCC High hardened scenario
     process = subprocess.Popen(
         [
-            "python3",
+            sys.executable,
             "server.py",
             "--cloud",
             "gcc-high",
@@ -49,7 +54,7 @@ def mock_server_gcc_high_hardened():
             "--port",
             str(port),
         ],
-        cwd="/home/mmn/github/m365-sim",
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -98,7 +103,7 @@ def mock_server_gcc_high_partial():
     # Start subprocess with GCC High partial scenario
     process = subprocess.Popen(
         [
-            "python3",
+            sys.executable,
             "server.py",
             "--cloud",
             "gcc-high",
@@ -107,7 +112,7 @@ def mock_server_gcc_high_partial():
             "--port",
             str(port),
         ],
-        cwd="/home/mmn/github/m365-sim",
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

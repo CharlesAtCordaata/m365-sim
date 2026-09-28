@@ -8,6 +8,7 @@ Tests:
 - Reloading doesn't break existing endpoints
 """
 
+import sys
 import json
 import tempfile
 import shutil
@@ -17,6 +18,9 @@ import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -42,13 +46,8 @@ def temp_scenario_server():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Copy greenfield scenario to temp directory
-    src_scenario = git_root / "scenarios" / "gcc-moderate" / "greenfield"
+    src_scenario = REPO_ROOT / "scenarios" / "gcc-moderate" / "greenfield"
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir_path = Path(tmpdir)
         scenarios_dir = tmpdir_path / "scenarios" / "gcc-moderate" / "greenfield"
@@ -59,11 +58,11 @@ def temp_scenario_server():
             shutil.copy2(json_file, scenarios_dir / json_file.name)
 
         # Copy server.py to temp directory
-        shutil.copy2(git_root / "server.py", tmpdir_path / "server.py")
+        shutil.copy2(REPO_ROOT / "server.py", tmpdir_path / "server.py")
 
         # Start subprocess with --scenario pointing to temp
         process = subprocess.Popen(
-            ["python3", "server.py", "--port", str(port), "--scenario", "greenfield"],
+            [sys.executable, "server.py", "--port", str(port), "--scenario", "greenfield"],
             cwd=str(tmpdir_path),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

@@ -4,12 +4,17 @@ Test extended $filter operators: ne, gt, lt, ge, le, startswith, contains, in.
 Tests integration with the mock server to ensure realistic Graph API behavior.
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import socket
 import time
 
 import httpx
 import pytest
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -37,8 +42,8 @@ def mock_server_hardened():
 
     # Start subprocess with hardened scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

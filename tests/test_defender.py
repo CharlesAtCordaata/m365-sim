@@ -10,8 +10,13 @@ Tests coverage:
 - Unmapped /api/unknown returns 404
 """
 
+import sys
+from pathlib import Path
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 class TestDefenderEndpointStructure:
@@ -413,7 +418,6 @@ def mock_server_partial():
     import subprocess
     import time
     import socket
-    from pathlib import Path
 
     def get_free_port():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -425,13 +429,9 @@ def mock_server_partial():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "partial", "--port", str(port)],
-        cwd=str(git_root),
+        [sys.executable, "server.py", "--scenario", "partial", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

@@ -6,12 +6,16 @@ Provides:
 - auth_headers: fixture returning Bearer token headers
 """
 
+import sys
 import subprocess
 import time
 import socket
 from pathlib import Path
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -37,15 +41,10 @@ def mock_server():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root by looking for .git directory
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Start subprocess
     process = subprocess.Popen(
-        ["python3", "server.py", "--port", str(port)],
-        cwd=str(git_root),
+        [sys.executable, "server.py", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -95,15 +94,10 @@ def mock_server_hardened():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root by looking for .git directory
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Start subprocess with hardened scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened", "--port", str(port)],
-        cwd=str(git_root),
+        [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -147,13 +141,9 @@ def mock_server_partial():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "partial", "--port", str(port)],
-        cwd=str(git_root),
+        [sys.executable, "server.py", "--scenario", "partial", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

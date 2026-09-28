@@ -11,11 +11,16 @@ Tests:
 - Org identity and cloud endpoint verification
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -43,8 +48,8 @@ def mock_server_enforced_gcc_moderate():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-moderate", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-moderate", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -92,8 +97,8 @@ def mock_server_enforced_gcc_high():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-high", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-high", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -141,8 +146,8 @@ def mock_server_enforced_commercial_e5():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "commercial-e5", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "commercial-e5", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

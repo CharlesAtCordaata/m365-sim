@@ -10,11 +10,16 @@ Tests cover:
 - All @odata.context fields present and correct
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -35,8 +40,8 @@ def mock_server_greenfield():
     url = f"http://localhost:{port}"
 
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "greenfield", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "greenfield", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
@@ -72,8 +77,8 @@ def mock_server_hardened():
     url = f"http://localhost:{port}"
 
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
+        [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
