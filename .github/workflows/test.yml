@@ -5,6 +5,9 @@ on:
     branches: [main]
   push:
     branches: [main]
+  # Manual runs on any branch: Actions tab → Tests → "Run workflow",
+  # or `gh workflow run test.yml --ref <branch>`.
+  workflow_dispatch:
 
 permissions:
   contents: read
