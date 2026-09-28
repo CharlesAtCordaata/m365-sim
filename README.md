@@ -14,17 +14,20 @@ Point your Graph API client at `http://localhost:8888` instead of `https://graph
 
 ### Start the Server
 
+Requires [uv](https://docs.astral.sh/uv/) 0.12.2 or newer (`uv self update` to upgrade). uv installs the right Python (3.14 by default) for you.
+
 ```bash
-# Clone and run (one-time setup)
+# Clone and run
 cd ~/github/m365-sim
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python server.py --port 8888
+uv sync                          # create .venv from uv.lock
+uv run server.py --port 8888
 
 # Or with Docker
 docker build -t m365-sim .
 docker run -d -p 8888:8888 m365-sim
 ```
+
+Without uv, plain pip still works with any Python 3.11+: `pip install -r requirements.txt && python server.py --port 8888`. That file holds runtime dependencies only and is generated from `uv.lock`.
 
 ### Pick Your Scenario
 
@@ -38,7 +41,7 @@ docker run -d -p 8888:8888 m365-sim
 | `--cloud commercial-e5` | `graph.microsoft.com`, Contoso Corp |
 
 ```bash
-python server.py --scenario hardened --cloud gcc-high --port 8888
+uv run server.py --scenario hardened --cloud gcc-high --port 8888
 ```
 
 ### Quick Test
@@ -63,10 +66,25 @@ curl -H "Authorization: Bearer test" "http://localhost:8888/v1.0/users?mock_stat
 ### Stateful Mode (Deploy-Then-Verify)
 
 ```bash
-python server.py --stateful --port 8888
+uv run server.py --stateful --port 8888
 ```
 
 POST/PATCH now mutate state. `POST /v1.0/_reset` restores baseline.
+
+## Development
+
+Dependencies live in `pyproject.toml` and are locked in `uv.lock`. Runtime packages are in `[project].dependencies`; test tools (pytest, httpx) are in the `dev` dependency group, which `uv sync` installs by default.
+
+```bash
+uv run pytest tests/ -v                 # full suite (starts real server subprocesses)
+uv run --isolated --python 3.11 pytest tests/   # another supported Python; leaves .venv alone
+
+uv add <package>                        # add a runtime dependency
+uv add --dev <package>                  # add a test-only dependency
+uv export --locked --no-dev -o requirements.txt   # regenerate after any lock change
+```
+
+CI runs the suite on Python 3.11, 3.12, 3.13 and 3.14, and fails if `uv.lock` or `requirements.txt` is out of date.
 
 ## Full Documentation
 

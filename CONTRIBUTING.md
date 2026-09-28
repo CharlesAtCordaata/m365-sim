@@ -55,6 +55,19 @@ The server is intentionally minimal. PRs that add substantial dependencies for m
 
 ---
 
+## Development Setup
+
+The project is managed with [uv](https://docs.astral.sh/uv/) (0.12.2 or newer):
+
+```bash
+uv sync                    # creates .venv from uv.lock (Python 3.14 by default)
+uv run pytest tests/ -v    # run the full suite before opening a PR
+```
+
+If a change genuinely needs a new dependency (see "Heavy dependencies" above), add it with `uv add <pkg>` (or `uv add --dev <pkg>` for test-only tools), then regenerate the pip/Docker requirements with `uv export --locked --no-dev -o requirements.txt`. Commit `pyproject.toml`, `uv.lock` and `requirements.txt` together; CI fails if they disagree.
+
+---
+
 ## Submitting Changes
 
 ### For fixture data corrections

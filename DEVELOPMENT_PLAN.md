@@ -17,7 +17,7 @@ Use the m365-sim-executor agent to execute subtask X.Y.Z
 **Goal**: A reusable Microsoft Graph API simulation platform for testing M365 compliance tools (primarily CMMC 2.0 L2 assessment workflows) against realistic tenant state without a live tenant.
 **Target Users**: Compliance tool integration test suites, M365 compliance tool developers, CI/CD pipelines
 **Timeline**: 1 week
-**Tech Stack**: Python 3.11+, FastAPI, uvicorn, pytest, httpx
+**Tech Stack**: Python 3.11+ (default 3.14), uv, FastAPI, uvicorn, pytest, httpx
 
 **MVP Scope**:
 - [x] Phase 00 — Decision Log
