@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Keep the SHA-pinned actions in .github/workflows/ current. Dependabot
+  # updates the commit SHA and the trailing "# vX.Y.Z" comment together.
+  #
+  # Python dependencies (uv) are intentionally not managed here yet: a
+  # Dependabot uv.lock bump would not regenerate requirements.txt, so the
+  # lock-and-export CI job would fail on every such PR.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # One PR per week for all action bumps instead of one PR per action.
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "ci"
