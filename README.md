@@ -84,7 +84,7 @@ uv add --dev <package>                  # add a test-only dependency
 uv export --locked --no-dev -o requirements.txt   # regenerate after any lock change
 ```
 
-CI runs the suite on Python 3.11, 3.12, 3.13 and 3.14, and fails if `uv.lock` or `requirements.txt` is out of date.
+CI runs the suite on Python 3.11, 3.12, 3.13 and 3.14, and fails if `uv.lock` or `requirements.txt` is out of date. It runs on pull requests and pushes to `main`; to run it on any other branch, use `gh workflow run test.yml --ref <branch>` or the Run workflow button on the Actions tab.
 
 ## Full Documentation
 
