@@ -11,11 +11,16 @@ Tests:
 - Org identity and cloud endpoint verification
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -33,7 +38,7 @@ def mock_server_enforced_gcc_moderate():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (GCC Moderate).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud gcc-moderate --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud gcc-moderate --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -43,10 +48,10 @@ def mock_server_enforced_gcc_moderate():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-moderate", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-moderate", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -82,7 +87,7 @@ def mock_server_enforced_gcc_high():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (GCC High).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud gcc-high --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud gcc-high --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -92,10 +97,10 @@ def mock_server_enforced_gcc_high():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-high", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-high", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -131,7 +136,7 @@ def mock_server_enforced_commercial_e5():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (Commercial E5).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud commercial-e5 --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud commercial-e5 --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -141,10 +146,10 @@ def mock_server_enforced_commercial_e5():
 
     # Start subprocess with hardened-enforced scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened-enforced", "--cloud", "commercial-e5", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "commercial-e5", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

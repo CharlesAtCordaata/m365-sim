@@ -4,10 +4,14 @@ Microsoft Graph API simulation platform for testing M365 compliance tools agains
 
 ## Quick Start
 
+Requires [uv](https://docs.astral.sh/uv/) 0.12.2+, which also installs the right Python (3.14 by default):
+
 ```bash
-pip install -r requirements.txt
-python server.py --port 8888
+uv sync
+uv run server.py --port 8888
 ```
+
+Without uv, any Python 3.11+ works with pip: `pip install -r requirements.txt && python server.py --port 8888`. `requirements.txt` holds runtime dependencies only and is generated from `uv.lock`.
 
 Or with Docker:
 
@@ -27,9 +31,9 @@ docker run -d --name m365-sim -p 8888:8888 m365-sim
 | `hardened` | Post-remediation, full CMMC posture | 8 (report-only) | 3 compliant | FIDO2 + Authenticator + TAP |
 
 ```bash
-python server.py --scenario greenfield   # default
-python server.py --scenario hardened
-python server.py --scenario partial
+uv run server.py --scenario greenfield   # default
+uv run server.py --scenario hardened
+uv run server.py --scenario partial
 ```
 
 ## Cloud Targets
@@ -41,9 +45,9 @@ python server.py --scenario partial
 | `commercial-e5` | `graph.microsoft.com` | `contoso.com` | Contoso Corp |
 
 ```bash
-python server.py --cloud gcc-moderate    # default
-python server.py --cloud gcc-high
-python server.py --cloud commercial-e5
+uv run server.py --cloud gcc-moderate    # default
+uv run server.py --cloud gcc-high
+uv run server.py --cloud commercial-e5
 ```
 
 All combinations work: `--cloud gcc-high --scenario hardened`
@@ -169,7 +173,7 @@ curl -H "Authorization: Bearer x" "http://localhost:8888/v1.0/users?mock_status=
 By default, writes are stateless (POST/PATCH return success but don't mutate fixtures). For deploy-then-verify flows:
 
 ```bash
-python server.py --stateful --port 8888
+uv run server.py --stateful --port 8888
 ```
 
 In stateful mode:

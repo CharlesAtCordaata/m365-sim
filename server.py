@@ -8,12 +8,10 @@ fixture loading, auth middleware, and error simulation.
 """
 
 import argparse
-import asyncio
 import copy
 import json
 import logging
 import re
-import sys
 import threading
 import time
 import uuid

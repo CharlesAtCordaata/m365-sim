@@ -4,12 +4,17 @@ Test extended $filter operators: ne, gt, lt, ge, le, startswith, contains, in.
 Tests integration with the mock server to ensure realistic Graph API behavior.
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import socket
 import time
 
 import httpx
 import pytest
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -27,7 +32,7 @@ def mock_server_hardened():
     Session-scoped fixture that starts m365-sim server with hardened scenario.
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -37,10 +42,10 @@ def mock_server_hardened():
 
     # Start subprocess with hardened scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened", "--port", str(port)],
-        cwd="/home/mmn/github/m365-sim",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

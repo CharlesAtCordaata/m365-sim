@@ -6,12 +6,16 @@ Provides:
 - auth_headers: fixture returning Bearer token headers
 """
 
+import sys
 import subprocess
 import time
 import socket
 from pathlib import Path
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -29,7 +33,7 @@ def mock_server():
     Session-scoped fixture that starts m365-sim server as a subprocess.
 
     - Picks a random available port
-    - Starts: python server.py --port {port}
+    - Starts: <sys.executable> server.py --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -37,17 +41,12 @@ def mock_server():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root by looking for .git directory
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Start subprocess
     process = subprocess.Popen(
-        ["python3", "server.py", "--port", str(port)],
-        cwd=str(git_root),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -87,7 +86,7 @@ def mock_server_hardened():
     Session-scoped fixture that starts m365-sim server with hardened scenario.
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -95,17 +94,12 @@ def mock_server_hardened():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root by looking for .git directory
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Start subprocess with hardened scenario
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "hardened", "--port", str(port)],
-        cwd=str(git_root),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -139,7 +133,7 @@ def mock_server_partial():
     Session-scoped fixture that starts m365-sim server with partial scenario.
 
     - Picks a random available port
-    - Starts: python server.py --scenario partial --port {port}
+    - Starts: <sys.executable> server.py --scenario partial --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -147,15 +141,11 @@ def mock_server_partial():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     process = subprocess.Popen(
-        ["python3", "server.py", "--scenario", "partial", "--port", str(port)],
-        cwd=str(git_root),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--scenario", "partial", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     start_time = time.time()

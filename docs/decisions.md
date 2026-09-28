@@ -89,3 +89,22 @@ Each entry records a design question, the options considered, the resolution, an
 
 **Resolution**: B — Defer to Phase 08
 **Rationale**: The kickoff spec provides exact JSON for greenfield and hardened scenarios. Hand-authoring these fixtures is straightforward. The builder becomes valuable after the foundation works, when custom scenarios are needed for edge-case testing (e.g., partial deployments, large tenant simulation).
+
+---
+
+### DEC-006: Python Version and Project Manager
+
+**Date**: 2026-09-28
+**Status**: DECIDED
+**Question**: Which Python should the project target now that 3.14 is the current stable release, and should dependency management move from pip + `requirements.txt` to uv?
+
+**Options**:
+| Option | Pros | Cons |
+|--------|------|------|
+| A. Stay on pip, bump CI matrix only | No tooling change for contributors | No lockfile: unpinned resolves drift (on 3.15 one silently fell back to pydantic 1 and broke at import); runtime and test deps stay mixed, so the Docker image ships pytest |
+| B. uv with `pyproject.toml` + `uv.lock`, keep a generated `requirements.txt` | Reproducible installs; uv provisions interpreters; PEP 735 dev group splits test tooling out; pip/Docker users unaffected | Contributors need uv >= 0.12.2; generated file must be kept in sync (enforced in CI) |
+| C. uv, drop `requirements.txt`, uv-based Docker image | Single source of truth | Breaks pip-only consumers; larger Dockerfile change for no runtime benefit today |
+
+**Resolution**: B — uv with a lockfile; default interpreter 3.14; `requires-python >=3.11`
+**Rationale**: The full suite passes unchanged on 3.11, 3.12, 3.13 and 3.14.7 (no deprecation warnings), so the floor stays at 3.11 until its October 2027 EOL while development, Docker and the default `.python-version` move to 3.14. A lockfile removes resolver drift, and `uv export --no-dev` keeps `requirements.txt` for Docker and pip users with hashes and without test tooling. CI checks both the lock and the export. 3.15 is deferred until pydantic-core, httptools and uvloop publish cp315 wheels; add it then as a non-blocking matrix leg.
+

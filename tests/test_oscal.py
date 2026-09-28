@@ -1,5 +1,6 @@
 """Tests for OSCAL Component Definition Generator."""
 
+import sys
 import json
 import subprocess
 from pathlib import Path
@@ -27,7 +28,7 @@ def test_generate_component_definition():
     with TemporaryDirectory() as tmpdir:
         output_file = Path(tmpdir) / "test-output.json"
         result = subprocess.run(
-            ["python3", "oscal/generate_component_definition.py",
+            [sys.executable, "oscal/generate_component_definition.py",
              "--output", str(output_file)],
             cwd=Path(__file__).parent.parent,
             capture_output=True,
@@ -106,9 +107,9 @@ def test_oscal_deterministic_uuids():
     with TemporaryDirectory() as tmpdir:
         file1 = Path(tmpdir) / "gen1.json"
         file2 = Path(tmpdir) / "gen2.json"
-        subprocess.run(["python3", "oscal/generate_component_definition.py", "--output", str(file1)],
+        subprocess.run([sys.executable, "oscal/generate_component_definition.py", "--output", str(file1)],
             cwd=Path(__file__).parent.parent, check=True, capture_output=True)
-        subprocess.run(["python3", "oscal/generate_component_definition.py", "--output", str(file2)],
+        subprocess.run([sys.executable, "oscal/generate_component_definition.py", "--output", str(file2)],
             cwd=Path(__file__).parent.parent, check=True, capture_output=True)
         with open(file1) as f1, open(file2) as f2:
             data1 = json.load(f1)

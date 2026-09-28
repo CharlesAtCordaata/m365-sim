@@ -23,11 +23,11 @@ calls against the mock server. Tests nine workflows:
 16. DEFENDER           — Defender for Endpoint /api/* endpoints
 
 Usage:
-    python test_harness.py                             # run all workflows
-    python test_harness.py --workflow assess            # assess both scenarios
-    python test_harness.py --workflow cloud             # cloud targets only
-    python test_harness.py --workflow extended-filter   # extended filters only
-    python test_harness.py --port 9999                 # custom port
+    uv run test_harness.py                             # run all workflows
+    uv run test_harness.py --workflow assess            # assess both scenarios
+    uv run test_harness.py --workflow cloud             # cloud targets only
+    uv run test_harness.py --workflow extended-filter   # extended filters only
+    uv run test_harness.py --port 9999                 # custom port
 """
 
 import argparse

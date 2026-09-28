@@ -1,0 +1,29 @@
+[project]
+name = "m365-sim"
+version = "0.1.0"
+description = "Microsoft Graph API simulation platform serving static M365 tenant fixtures"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.128.1",
+    "uvicorn[standard]>=0.38.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=8.4",
+]
+
+[tool.uv]
+# Flat layout (server.py + builder/, sdk/, oscal/ at the repo root): manage
+# the environment only; don't build or install the project as a package.
+package = false
+# 0.12.2 is the first uv release that can download CPython 3.14.7.
+required-version = ">=0.12.2"
+
+[tool.pytest.ini_options]
+# Keep the root-level test_harness.py (a CLI tool, not a test module) out of
+# collection.
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -37,7 +37,8 @@
 
 ### Must Use
 
-- Python 3.11+
+- Python 3.11+ (default dev/runtime interpreter: 3.14)
+- uv for dependency and environment management (pyproject.toml + uv.lock)
 - FastAPI
 - uvicorn
 - pytest

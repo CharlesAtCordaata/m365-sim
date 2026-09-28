@@ -11,11 +11,16 @@ Tests:
 Uses mock_server_stateful fixture (subprocess with --stateful flag).
 """
 
+import sys
+from pathlib import Path
 import subprocess
 import time
 import socket
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -33,7 +38,7 @@ def mock_server_stateful():
     Function-scoped fixture that starts m365-sim server with --stateful flag.
 
     - Picks a random available port
-    - Starts: python server.py --port {port} --stateful
+    - Starts: <sys.executable> server.py --port {port} --stateful
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -43,10 +48,10 @@ def mock_server_stateful():
 
     # Start subprocess with --stateful flag
     process = subprocess.Popen(
-        ["python3", "server.py", "--port", str(port), "--stateful"],
-        cwd="/home/mmn/github/m365-sim",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--port", str(port), "--stateful"],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

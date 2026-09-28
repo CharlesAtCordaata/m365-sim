@@ -14,12 +14,16 @@ Tests:
 - Auth methods policy is singleton
 """
 
+import sys
 import subprocess
 import time
 import socket
 from pathlib import Path
 import pytest
 import httpx
+
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def get_free_port():
@@ -36,7 +40,7 @@ def mock_server_gcc_high():
     """
     Session-scoped fixture that starts m365-sim server for GCC High.
 
-    - Starts: python server.py --cloud gcc-high --port {port}
+    - Starts: <sys.executable> server.py --cloud gcc-high --port {port}
     - Waits for /health to respond
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -44,17 +48,12 @@ def mock_server_gcc_high():
     port = get_free_port()
     url = f"http://localhost:{port}"
 
-    # Find git root
-    git_root = Path(__file__).parent.parent
-    while git_root != git_root.parent and not (git_root / ".git").exists():
-        git_root = git_root.parent
-
     # Start subprocess with gcc-high cloud
     process = subprocess.Popen(
-        ["python3", "server.py", "--cloud", "gcc-high", "--port", str(port)],
-        cwd=str(git_root),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        [sys.executable, "server.py", "--cloud", "gcc-high", "--port", str(port)],
+        cwd=str(REPO_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready
