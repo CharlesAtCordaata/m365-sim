@@ -45,8 +45,8 @@ def mock_server():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -98,8 +98,8 @@ def mock_server_hardened():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "hardened", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -144,8 +144,8 @@ def mock_server_partial():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "partial", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     start_time = time.time()

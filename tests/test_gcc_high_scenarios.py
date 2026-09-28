@@ -55,8 +55,8 @@ def mock_server_gcc_high_hardened():
             str(port),
         ],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -113,8 +113,8 @@ def mock_server_gcc_high_partial():
             str(port),
         ],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

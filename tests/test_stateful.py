@@ -50,8 +50,8 @@ def mock_server_stateful():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--port", str(port), "--stateful"],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

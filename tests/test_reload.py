@@ -64,8 +64,8 @@ def temp_scenario_server():
         process = subprocess.Popen(
             [sys.executable, "server.py", "--port", str(port), "--scenario", "greenfield"],
             cwd=str(tmpdir_path),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
         )
 
         # Wait for server to be ready

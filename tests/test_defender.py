@@ -432,8 +432,8 @@ def mock_server_partial():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "partial", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     start_time = time.time()

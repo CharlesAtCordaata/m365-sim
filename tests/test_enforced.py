@@ -50,8 +50,8 @@ def mock_server_enforced_gcc_moderate():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-moderate", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -99,8 +99,8 @@ def mock_server_enforced_gcc_high():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "gcc-high", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -148,8 +148,8 @@ def mock_server_enforced_commercial_e5():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--scenario", "hardened-enforced", "--cloud", "commercial-e5", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)

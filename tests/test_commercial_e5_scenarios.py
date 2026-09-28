@@ -50,8 +50,8 @@ def mock_server_e5_hardened():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--cloud", "commercial-e5", "--scenario", "hardened", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
@@ -99,8 +99,8 @@ def mock_server_e5_partial():
     process = subprocess.Popen(
         [sys.executable, "server.py", "--cloud", "commercial-e5", "--scenario", "partial", "--port", str(port)],
         cwd=str(REPO_ROOT),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
 
     # Wait for server to be ready (retry loop, 5s timeout)
