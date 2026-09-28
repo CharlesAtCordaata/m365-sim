@@ -38,7 +38,7 @@ def mock_server_enforced_gcc_moderate():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (GCC Moderate).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud gcc-moderate --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud gcc-moderate --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -87,7 +87,7 @@ def mock_server_enforced_gcc_high():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (GCC High).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud gcc-high --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud gcc-high --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -136,7 +136,7 @@ def mock_server_enforced_commercial_e5():
     Session-scoped fixture that starts m365-sim server with hardened-enforced scenario (Commercial E5).
 
     - Picks a random available port
-    - Starts: python server.py --scenario hardened-enforced --cloud commercial-e5 --port {port}
+    - Starts: <sys.executable> server.py --scenario hardened-enforced --cloud commercial-e5 --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

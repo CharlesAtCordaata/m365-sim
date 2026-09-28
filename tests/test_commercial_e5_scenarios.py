@@ -38,7 +38,7 @@ def mock_server_e5_hardened():
     Session-scoped fixture that starts m365-sim server with commercial-e5 hardened scenario.
 
     - Picks a random available port
-    - Starts: python server.py --cloud commercial-e5 --scenario hardened --port {port}
+    - Starts: <sys.executable> server.py --cloud commercial-e5 --scenario hardened --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -87,7 +87,7 @@ def mock_server_e5_partial():
     Session-scoped fixture that starts m365-sim server with commercial-e5 partial scenario.
 
     - Picks a random available port
-    - Starts: python server.py --cloud commercial-e5 --scenario partial --port {port}
+    - Starts: <sys.executable> server.py --cloud commercial-e5 --scenario partial --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

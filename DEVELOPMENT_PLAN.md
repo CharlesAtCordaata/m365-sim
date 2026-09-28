@@ -3729,11 +3729,11 @@ git add -A && git commit -m "test(defender): Defender for Endpoint API tests [25
 **Completion Notes**:
 - **Implementation**: No application code changes were needed for 3.14 (no deprecated/removed stdlib APIs, no PEP 649 impact). The blocking work was test portability: at the previous HEAD, 127 of 382 tests errored on any checkout other than the original author's.
 - **Files Added**: pyproject.toml, uv.lock, .python-version
-- **Files Modified**: 15 test modules, requirements.txt (now generated), .github/workflows/test.yml, Dockerfile, server.py (imports), README.md, docs/guide.md, docs/decisions.md, CLAUDE.md, CONTRIBUTING.md, PROJECT_BRIEF.md, DEVELOPMENT_PLAN.md, test_harness.py (docstring)
+- **Files Modified**: 15 test modules, scenarios/gcc-high/greenfield/_README.md, requirements.txt (now generated), .github/workflows/test.yml, Dockerfile, server.py (imports), README.md, docs/guide.md, docs/decisions.md, CLAUDE.md, CONTRIBUTING.md, PROJECT_BRIEF.md, DEVELOPMENT_PLAN.md, test_harness.py (docstring)
 - **Tests**: 382/382 passing on 3.11, 3.12, 3.13 and 3.14.7 via `uv run --locked pytest`; also with an unactivated venv and minimal PATH; zero DeprecationWarnings/ResourceWarnings
 - **Docker**: image builds on python:3.14-slim, `/health` healthy, no pytest/httpx in the image
 - **Deferred**: Python 3.15 (final due 2026-10-01) — add as a `continue-on-error` matrix leg once pydantic-core, httptools and uvloop publish cp315 wheels. Optional follow-ups: bump actions/checkout from the node20 v4 SHA, add `.github/dependabot.yml` (uv + github-actions), `Optional[X]` → `X | None` in builder/tenant_builder.py
-- **Git**: feature/27-1-python314-uv branch, 9 commits (62924b8, 1f3354c, c697370, 95cb1ca, 79e9e4c, 4bf6048, 851c08a, 87eae49, plus this plan update)
+- **Git**: feature/27-1-python314-uv branch, 10 commits (62924b8, 1f3354c, c697370, 95cb1ca, 79e9e4c, 4bf6048, 851c08a, 87eae49, 211b57a, plus a final docs sweep)
 
 ---
 

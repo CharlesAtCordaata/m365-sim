@@ -40,7 +40,7 @@ def mock_server_gcc_high():
     """
     Session-scoped fixture that starts m365-sim server for GCC High.
 
-    - Starts: python server.py --cloud gcc-high --port {port}
+    - Starts: <sys.executable> server.py --cloud gcc-high --port {port}
     - Waits for /health to respond
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

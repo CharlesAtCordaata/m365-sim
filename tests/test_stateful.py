@@ -38,7 +38,7 @@ def mock_server_stateful():
     Function-scoped fixture that starts m365-sim server with --stateful flag.
 
     - Picks a random available port
-    - Starts: python server.py --port {port} --stateful
+    - Starts: <sys.executable> server.py --port {port} --stateful
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

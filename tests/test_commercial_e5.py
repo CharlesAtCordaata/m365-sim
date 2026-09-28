@@ -38,7 +38,7 @@ def mock_server_e5():
     Session-scoped fixture that starts m365-sim server as a subprocess with commercial-e5 cloud.
 
     - Picks a random available port
-    - Starts: python server.py --cloud commercial-e5 --port {port}
+    - Starts: <sys.executable> server.py --cloud commercial-e5 --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

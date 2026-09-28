@@ -34,7 +34,7 @@ def mock_server_gcc_high_hardened():
     Session-scoped fixture that starts m365-sim server with GCC High hardened scenario.
 
     - Picks a random available port
-    - Starts: python server.py --cloud gcc-high --scenario hardened --port {port}
+    - Starts: <sys.executable> server.py --cloud gcc-high --scenario hardened --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown
@@ -92,7 +92,7 @@ def mock_server_gcc_high_partial():
     Session-scoped fixture that starts m365-sim server with GCC High partial scenario.
 
     - Picks a random available port
-    - Starts: python server.py --cloud gcc-high --scenario partial --port {port}
+    - Starts: <sys.executable> server.py --cloud gcc-high --scenario partial --port {port}
     - Waits for /health to respond (retry loop, 5s timeout)
     - Yields f"http://localhost:{port}"
     - Kills subprocess on teardown

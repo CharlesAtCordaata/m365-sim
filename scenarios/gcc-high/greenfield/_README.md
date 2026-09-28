@@ -81,13 +81,13 @@ All 29 fixtures in this directory contain **real data** representing a greenfiel
 Start the server with the GCC High cloud target:
 
 ```bash
-python server.py --cloud gcc-high
+uv run server.py --cloud gcc-high
 ```
 
 Or with explicit scenario and cloud:
 
 ```bash
-python server.py --scenario greenfield --cloud gcc-high --port 8888
+uv run server.py --scenario greenfield --cloud gcc-high --port 8888
 ```
 
 ## Example Request
