@@ -48,8 +48,9 @@ Use the m365-sim-executor agent to execute subtask X.Y.Z
 - [x] Phase 24 — Beta-Specific Fixtures (Issue #1)
 - [x] Phase 25 — Defender for Endpoint API Surface (Issue #2)
 - [x] Phase 26 — OAuth2 Permission Grants & Agreements Endpoints (Issue #4)
+- [x] Phase 27 — Python 3.14 + uv Migration
 
-**Current**: Phase 26 (Complete)
+**Current**: Phase 27 (Complete — pending PR/CI)
 **Next**: All planned phases complete ✅
 
 ---
@@ -3691,6 +3692,51 @@ git add -A && git commit -m "test(defender): Defender for Endpoint API tests [25
 
 ---
 
+## Phase 27: Python 3.14 + uv Migration
+
+**Goal**: Move the default interpreter to CPython 3.14 (3.14.7, latest stable) and replace pip + `requirements.txt` with uv (`pyproject.toml` + `uv.lock`), keeping `requires-python >=3.11`. See DEC-006 in `docs/decisions.md`.
+**Duration**: 1 session
+
+### Task 27.1: Tests Portability, uv Project, CI, Docker, Docs
+
+**Git**: Branch `feature/27-1-python314-uv`
+
+**Subtask 27.1.1: Test Fixture Portability (prerequisite)**
+- [x] Replace 15 hardcoded `cwd="/home/mmn/github/m365-sim"` sites (10 files) with `REPO_ROOT`
+- [x] Replace 24 `"python3"` launches (15 files) with `sys.executable`; drop the `.git` walk
+- [x] Route server subprocess stdout/stderr to `DEVNULL` (unread pipes → ResourceWarnings / deadlock risk)
+
+**Subtask 27.1.2: uv Project Files**
+- [x] `pyproject.toml`: runtime deps + `dev` dependency group; `package = false`; `required-version >=0.12.2`; pytest `testpaths`
+- [x] Raise floors to 3.14-compatible releases (fastapi>=0.128.1, uvicorn>=0.38.0, pytest>=8.4, httpx>=0.28.1); drop unused pytest-asyncio
+- [x] `.python-version` = 3.14; commit `uv.lock`
+- [x] Regenerate `requirements.txt` via `uv export --locked --no-dev` (runtime-only, hashed)
+
+**Subtask 27.1.3: CI and Docker**
+- [x] `.github/workflows/test.yml`: astral-sh/setup-uv v10.2.0 (SHA-pinned, uv 0.12.17), matrix 3.11–3.14, lock/export drift job
+- [x] Dockerfile base `python:3.14-slim`
+
+**Subtask 27.1.4: Cleanup and Documentation**
+- [x] Remove unused `asyncio`/`sys` imports from `server.py`
+- [x] Update README.md, docs/guide.md, CLAUDE.md, CONTRIBUTING.md, PROJECT_BRIEF.md, test_harness.py usage
+- [x] Add DEC-006 to docs/decisions.md
+
+### Task 27.1 Complete — Squash Merge
+- [x] All subtasks complete (27.1.1 through 27.1.4)
+- [ ] PR opened and first CI run green on 3.11–3.14 (GitHub reported no prior workflow runs for this repo)
+- [ ] Squash-merged to main
+
+**Completion Notes**:
+- **Implementation**: No application code changes were needed for 3.14 (no deprecated/removed stdlib APIs, no PEP 649 impact). The blocking work was test portability: at the previous HEAD, 127 of 382 tests errored on any checkout other than the original author's.
+- **Files Added**: pyproject.toml, uv.lock, .python-version
+- **Files Modified**: 15 test modules, requirements.txt (now generated), .github/workflows/test.yml, Dockerfile, server.py (imports), README.md, docs/guide.md, docs/decisions.md, CLAUDE.md, CONTRIBUTING.md, PROJECT_BRIEF.md, DEVELOPMENT_PLAN.md, test_harness.py (docstring)
+- **Tests**: 382/382 passing on 3.11, 3.12, 3.13 and 3.14.7 via `uv run --locked pytest`; also with an unactivated venv and minimal PATH; zero DeprecationWarnings/ResourceWarnings
+- **Docker**: image builds on python:3.14-slim, `/health` healthy, no pytest/httpx in the image
+- **Deferred**: Python 3.15 (final due 2026-10-01) — add as a `continue-on-error` matrix leg once pydantic-core, httptools and uvloop publish cp315 wheels. Optional follow-ups: bump actions/checkout from the node20 v4 SHA, add `.github/dependabot.yml` (uv + github-actions), `Optional[X]` → `X | None` in builder/tenant_builder.py
+- **Git**: feature/27-1-python314-uv branch, 9 commits (62924b8, 1f3354c, c697370, 95cb1ca, 79e9e4c, 4bf6048, 851c08a, 87eae49, plus this plan update)
+
+---
+
 ## Git Workflow
 
 ### Branch Strategy
@@ -3700,7 +3746,7 @@ git add -A && git commit -m "test(defender): Defender for Endpoint API tests [25
 
 ### Commit Strategy
 - One commit per subtask: `feat(scope): description`
-- Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
+- Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `build`, `ci`
 
 ### Merge Strategy
 - Squash merge when task is complete
