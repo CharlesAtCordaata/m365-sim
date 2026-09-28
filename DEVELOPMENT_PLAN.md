@@ -50,7 +50,7 @@ Use the m365-sim-executor agent to execute subtask X.Y.Z
 - [x] Phase 26 — OAuth2 Permission Grants & Agreements Endpoints (Issue #4)
 - [x] Phase 27 — Python 3.14 + uv Migration
 
-**Current**: Phase 27 (Complete — pending PR/CI)
+**Current**: Phase 27 (Complete)
 **Next**: All planned phases complete ✅
 
 ---
@@ -3723,8 +3723,8 @@ git add -A && git commit -m "test(defender): Defender for Endpoint API tests [25
 
 ### Task 27.1 Complete — Squash Merge
 - [x] All subtasks complete (27.1.1 through 27.1.4)
-- [ ] PR opened and first CI run green on 3.11–3.14 (GitHub reported no prior workflow runs for this repo)
-- [ ] Squash-merged to main
+- [x] PR opened and first CI run green on 3.11–3.14 (PR #1 on the fork; Actions had to be enabled first — GitHub disables workflows on forks by default)
+- [x] Squash-merged to main (fbb3cc4)
 
 **Completion Notes**:
 - **Implementation**: No application code changes were needed for 3.14 (no deprecated/removed stdlib APIs, no PEP 649 impact). The blocking work was test portability: at the previous HEAD, 127 of 382 tests errored on any checkout other than the original author's.
