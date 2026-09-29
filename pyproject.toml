@@ -11,6 +11,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "coverage>=7.10",
     "httpx>=0.28.1",
     "pytest>=8.4",
 ]
@@ -27,3 +28,17 @@ required-version = ">=0.12.2"
 # collection.
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.coverage.run]
+# The tests drive server.py as a subprocess, so patch subprocess creation and
+# flush data on SIGTERM (conftest terminates the server).
+source = ["server", "builder", "sdk"]
+patch = ["subprocess"]
+sigterm = true
+parallel = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+# Some tests run a copy of server.py from a temp dir that no longer exists.
+ignore_errors = true

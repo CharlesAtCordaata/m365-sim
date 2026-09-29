@@ -76,7 +76,7 @@ m365-sim/
 - Test files use `mock_server` and `auth_headers` fixtures from `conftest.py`
 - No mocking — all tests are integration tests against the actual server
 - Fixtures launch the server with `[sys.executable, "server.py", ...]` and `cwd=REPO_ROOT` (`Path(__file__).resolve().parent.parent`) — never a bare `"python3"` or an absolute path
-- Coverage target: 80%
+- Coverage target: 80% (enforced by `fail_under` in `pyproject.toml`; `server.py` runs in a subprocess, so measure with `coverage run` + `combine`, not `pytest --cov`)
 
 ### Git
 - One branch per **task** (not subtask): `feature/{phase}-{task}-{description}`
@@ -97,6 +97,7 @@ uv run server.py --scenario hardened --port 9999    # hardened on 9999
 uv run pytest tests/ -v
 uv run pytest tests/test_server.py -v               # greenfield only
 uv run pytest tests/test_hardened.py -v             # hardened only
+uv run coverage run -m pytest tests/ && uv run coverage combine -q && uv run coverage report  # coverage (subprocess-aware; fails <80%)
 uv run --isolated --python 3.11 pytest tests/       # another Python, leaves .venv alone
 
 # Dependencies (then commit pyproject.toml, uv.lock, requirements.txt together)
