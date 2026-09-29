@@ -1,0 +1,1552 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "m365-sim",
+        "description": "Microsoft Graph API simulation platform for CMMC 2.0 compliance assessment",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "summary": "Health",
+                "description": "Health check endpoint (no auth required).",
+                "operationId": "health_health_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/users": {
+            "get": {
+                "summary": "Get Users",
+                "description": "GET /v1.0/users \u2014 return users fixture.",
+                "operationId": "get_users_v1_0_users_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/me": {
+            "get": {
+                "summary": "Get Me",
+                "description": "GET /v1.0/me \u2014 return me fixture.",
+                "operationId": "get_me_v1_0_me_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/me/authentication/methods": {
+            "get": {
+                "summary": "Get Me Auth Methods",
+                "description": "GET /v1.0/me/authentication/methods \u2014 return me_auth_methods fixture.",
+                "operationId": "get_me_auth_methods_v1_0_me_authentication_methods_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/users/{user_id}/authentication/methods": {
+            "get": {
+                "summary": "Get User Auth Methods",
+                "description": "GET /v1.0/users/{user_id}/authentication/methods \u2014 return me_auth_methods fixture.",
+                "operationId": "get_user_auth_methods_v1_0_users__user_id__authentication_methods_get",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "User Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/organization": {
+            "get": {
+                "summary": "Get Organization",
+                "description": "GET /v1.0/organization \u2014 return organization fixture.",
+                "operationId": "get_organization_v1_0_organization_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/domains": {
+            "get": {
+                "summary": "Get Domains",
+                "description": "GET /v1.0/domains \u2014 return domains fixture.",
+                "operationId": "get_domains_v1_0_domains_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/groups": {
+            "get": {
+                "summary": "Get Groups",
+                "description": "GET /v1.0/groups \u2014 return groups fixture.",
+                "operationId": "get_groups_v1_0_groups_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/applications": {
+            "get": {
+                "summary": "Get Applications",
+                "description": "GET /v1.0/applications \u2014 return applications fixture.",
+                "operationId": "get_applications_v1_0_applications_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/servicePrincipals": {
+            "get": {
+                "summary": "Get Service Principals",
+                "description": "GET /v1.0/servicePrincipals \u2014 return service_principals fixture.",
+                "operationId": "get_service_principals_v1_0_servicePrincipals_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/devices": {
+            "get": {
+                "summary": "Get Devices",
+                "description": "GET /v1.0/devices \u2014 return devices fixture.",
+                "operationId": "get_devices_v1_0_devices_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceManagement/managedDevices": {
+            "get": {
+                "summary": "Get Managed Devices",
+                "description": "GET /v1.0/deviceManagement/managedDevices \u2014 return managed_devices fixture.",
+                "operationId": "get_managed_devices_v1_0_deviceManagement_managedDevices_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceManagement/deviceCompliancePolicies": {
+            "get": {
+                "summary": "Get Compliance Policies",
+                "description": "GET /v1.0/deviceManagement/deviceCompliancePolicies \u2014 return compliance_policies fixture.",
+                "operationId": "get_compliance_policies_v1_0_deviceManagement_deviceCompliancePolicies_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Post Compliance Policy",
+                "description": "POST /v1.0/deviceManagement/deviceCompliancePolicies \u2014 return request body with added id and createdDateTime.",
+                "operationId": "post_compliance_policy_v1_0_deviceManagement_deviceCompliancePolicies_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceManagement/deviceConfigurations": {
+            "get": {
+                "summary": "Get Device Configurations",
+                "description": "GET /v1.0/deviceManagement/deviceConfigurations \u2014 return device_configurations fixture.",
+                "operationId": "get_device_configurations_v1_0_deviceManagement_deviceConfigurations_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Post Device Configuration",
+                "description": "POST /v1.0/deviceManagement/deviceConfigurations \u2014 return request body with added id and createdDateTime.",
+                "operationId": "post_device_configuration_v1_0_deviceManagement_deviceConfigurations_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceManagement/deviceEnrollmentConfigurations": {
+            "get": {
+                "summary": "Get Enrollment Configurations",
+                "description": "GET /v1.0/deviceManagement/deviceEnrollmentConfigurations \u2014 return device_enrollment_configurations fixture.",
+                "operationId": "get_enrollment_configurations_v1_0_deviceManagement_deviceEnrollmentConfigurations_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/identity/conditionalAccess/policies": {
+            "get": {
+                "summary": "Get Ca Policies",
+                "description": "GET /v1.0/identity/conditionalAccess/policies \u2014 return conditional_access_policies fixture.",
+                "operationId": "get_ca_policies_v1_0_identity_conditionalAccess_policies_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Post Ca Policy",
+                "description": "POST /v1.0/identity/conditionalAccess/policies \u2014 return request body with added id and createdDateTime.",
+                "operationId": "post_ca_policy_v1_0_identity_conditionalAccess_policies_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/identity/conditionalAccess/namedLocations": {
+            "get": {
+                "summary": "Get Named Locations",
+                "description": "GET /v1.0/identity/conditionalAccess/namedLocations \u2014 return named_locations fixture.",
+                "operationId": "get_named_locations_v1_0_identity_conditionalAccess_namedLocations_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/incidents": {
+            "get": {
+                "summary": "Get Security Incidents",
+                "description": "GET /v1.0/security/incidents \u2014 return security_incidents fixture.",
+                "operationId": "get_security_incidents_v1_0_security_incidents_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/alerts_v2": {
+            "get": {
+                "summary": "Get Security Alerts",
+                "description": "GET /v1.0/security/alerts_v2 \u2014 return security_alerts fixture.",
+                "operationId": "get_security_alerts_v1_0_security_alerts_v2_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/secureScores": {
+            "get": {
+                "summary": "Get Secure Scores",
+                "description": "GET /v1.0/security/secureScores \u2014 return secure_scores fixture.",
+                "operationId": "get_secure_scores_v1_0_security_secureScores_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/secureScoreControlProfiles": {
+            "get": {
+                "summary": "Get Score Control Profiles",
+                "description": "GET /v1.0/security/secureScoreControlProfiles \u2014 return secure_score_control_profiles fixture.",
+                "operationId": "get_score_control_profiles_v1_0_security_secureScoreControlProfiles_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/directoryRoles": {
+            "get": {
+                "summary": "Get Directory Roles",
+                "description": "GET /v1.0/directoryRoles \u2014 return directory_roles fixture.",
+                "operationId": "get_directory_roles_v1_0_directoryRoles_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/directoryRoles/{role_id}/members": {
+            "get": {
+                "summary": "Get Directory Role Members",
+                "description": "GET /v1.0/directoryRoles/{role_id}/members \u2014 return directory_role_members fixture.",
+                "operationId": "get_directory_role_members_v1_0_directoryRoles__role_id__members_get",
+                "parameters": [
+                    {
+                        "name": "role_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Role Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/roleManagement/directory/roleAssignments": {
+            "get": {
+                "summary": "Get Role Assignments",
+                "description": "GET /v1.0/roleManagement/directory/roleAssignments \u2014 return role_assignments fixture.",
+                "operationId": "get_role_assignments_v1_0_roleManagement_directory_roleAssignments_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/roleManagement/directory/roleDefinitions": {
+            "get": {
+                "summary": "Get Role Definitions",
+                "description": "GET /v1.0/roleManagement/directory/roleDefinitions \u2014 return role_definitions fixture.",
+                "operationId": "get_role_definitions_v1_0_roleManagement_directory_roleDefinitions_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/roleManagement/directory/roleEligibilitySchedules": {
+            "get": {
+                "summary": "Get Role Eligibility Schedules",
+                "description": "GET /v1.0/roleManagement/directory/roleEligibilitySchedules \u2014 return role_eligibility_schedules fixture.",
+                "operationId": "get_role_eligibility_schedules_v1_0_roleManagement_directory_roleEligibilitySchedules_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/roleManagement/directory/roleAssignmentSchedules": {
+            "get": {
+                "summary": "Get Role Assignment Schedules",
+                "description": "GET /v1.0/roleManagement/directory/roleAssignmentSchedules \u2014 return role_assignment_schedules fixture.",
+                "operationId": "get_role_assignment_schedules_v1_0_roleManagement_directory_roleAssignmentSchedules_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/policies/authenticationMethodsPolicy": {
+            "get": {
+                "summary": "Get Auth Methods Policy",
+                "description": "GET /v1.0/policies/authenticationMethodsPolicy \u2014 return auth_methods_policy fixture.",
+                "operationId": "get_auth_methods_policy_v1_0_policies_authenticationMethodsPolicy_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/{method_id}": {
+            "get": {
+                "summary": "Get Auth Method Config",
+                "description": "GET /v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/{method_id}\n\u2014 extract and return specific auth method config by id.",
+                "operationId": "get_auth_method_config_v1_0_policies_authenticationMethodsPolicy_authenticationMethodConfigurations__method_id__get",
+                "parameters": [
+                    {
+                        "name": "method_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Method Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Patch Auth Method Config",
+                "description": "PATCH /v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/{method_id}\n\u2014 return request body unchanged.",
+                "operationId": "patch_auth_method_config_v1_0_policies_authenticationMethodsPolicy_authenticationMethodConfigurations__method_id__patch",
+                "parameters": [
+                    {
+                        "name": "method_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Method Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/auditLogs/signIns": {
+            "get": {
+                "summary": "Get Audit Sign Ins",
+                "description": "GET /v1.0/auditLogs/signIns \u2014 return audit_sign_ins fixture.",
+                "operationId": "get_audit_sign_ins_v1_0_auditLogs_signIns_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/auditLogs/directoryAudits": {
+            "get": {
+                "summary": "Get Audit Directory",
+                "description": "GET /v1.0/auditLogs/directoryAudits \u2014 return audit_directory fixture.",
+                "operationId": "get_audit_directory_v1_0_auditLogs_directoryAudits_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/informationProtection/policy/labels": {
+            "get": {
+                "summary": "Get Info Protection Labels",
+                "description": "GET /v1.0/informationProtection/policy/labels \u2014 return information_protection_labels fixture.",
+                "operationId": "get_info_protection_labels_v1_0_informationProtection_policy_labels_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/policies/authorizationPolicy": {
+            "get": {
+                "summary": "Get Authorization Policy",
+                "description": "GET /v1.0/policies/authorizationPolicy \u2014 return authorization_policy fixture.",
+                "operationId": "get_authorization_policy_v1_0_policies_authorizationPolicy_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/subscribedSkus": {
+            "get": {
+                "summary": "Get Subscribed Skus",
+                "description": "GET /v1.0/subscribedSkus \u2014 return subscribed_skus fixture.",
+                "operationId": "get_subscribed_skus_v1_0_subscribedSkus_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/reports/authenticationMethods/usersRegisteredByMethod": {
+            "get": {
+                "summary": "Get Users Registered By Method",
+                "description": "GET /v1.0/reports/authenticationMethods/usersRegisteredByMethod \u2014 return users_registered_by_method fixture.",
+                "operationId": "get_users_registered_by_method_v1_0_reports_authenticationMethods_usersRegisteredByMethod_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/identityGovernance/accessReviews/definitions": {
+            "get": {
+                "summary": "Get Access Review Definitions",
+                "description": "GET /v1.0/identityGovernance/accessReviews/definitions \u2014 return access_review_definitions fixture.",
+                "operationId": "get_access_review_definitions_v1_0_identityGovernance_accessReviews_definitions_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceAppManagement/managedAppPolicies": {
+            "get": {
+                "summary": "Get Managed App Policies",
+                "description": "GET /v1.0/deviceAppManagement/managedAppPolicies \u2014 return managed_app_policies fixture.",
+                "operationId": "get_managed_app_policies_v1_0_deviceAppManagement_managedAppPolicies_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceAppManagement/mobileApps": {
+            "get": {
+                "summary": "Get Mobile Apps",
+                "description": "GET /v1.0/deviceAppManagement/mobileApps \u2014 return mobile_apps fixture.",
+                "operationId": "get_mobile_apps_v1_0_deviceAppManagement_mobileApps_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/deviceManagement/detectedApps": {
+            "get": {
+                "summary": "Get Detected Apps",
+                "description": "GET /v1.0/deviceManagement/detectedApps \u2014 return detected_apps fixture.",
+                "operationId": "get_detected_apps_v1_0_deviceManagement_detectedApps_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/auditLogs/provisioning": {
+            "get": {
+                "summary": "Get Provisioning Logs",
+                "description": "GET /v1.0/auditLogs/provisioning \u2014 return provisioning_logs fixture.",
+                "operationId": "get_provisioning_logs_v1_0_auditLogs_provisioning_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/alerts": {
+            "get": {
+                "summary": "Get Security Alerts V1",
+                "description": "GET /v1.0/security/alerts \u2014 return security_alerts_v1 fixture.",
+                "operationId": "get_security_alerts_v1_v1_0_security_alerts_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/policies/identitySecurityDefaultsEnforcementPolicy": {
+            "get": {
+                "summary": "Get Security Defaults",
+                "description": "GET /v1.0/policies/identitySecurityDefaultsEnforcementPolicy \u2014 return identity_security_defaults fixture.",
+                "operationId": "get_security_defaults_v1_0_policies_identitySecurityDefaultsEnforcementPolicy_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/admin/sharepoint/settings": {
+            "get": {
+                "summary": "Get Sharepoint Settings",
+                "description": "GET /v1.0/admin/sharepoint/settings \u2014 return sharepoint_settings fixture.",
+                "operationId": "get_sharepoint_settings_v1_0_admin_sharepoint_settings_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/security/informationProtection/sensitivityLabels": {
+            "get": {
+                "summary": "Get Sensitivity Labels",
+                "description": "GET /v1.0/security/informationProtection/sensitivityLabels \u2014 return sensitivity_labels fixture.",
+                "operationId": "get_sensitivity_labels_v1_0_security_informationProtection_sensitivityLabels_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/oauth2PermissionGrants": {
+            "get": {
+                "summary": "Get Oauth2 Permission Grants",
+                "description": "GET /v1.0/oauth2PermissionGrants \u2014 return oauth2_permission_grants fixture.",
+                "operationId": "get_oauth2_permission_grants_v1_0_oauth2PermissionGrants_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/agreements": {
+            "get": {
+                "summary": "Get Agreements",
+                "description": "GET /v1.0/agreements \u2014 return agreements fixture.",
+                "operationId": "get_agreements_v1_0_agreements_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/_reset": {
+            "post": {
+                "summary": "Reset Fixtures",
+                "description": "POST /v1.0/_reset \u2014 reset fixtures to baseline (stateful mode only).",
+                "operationId": "reset_fixtures_v1_0__reset_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1.0/_reload": {
+            "post": {
+                "summary": "Reload Fixtures",
+                "description": "POST /v1.0/_reload \u2014 reload fixtures from disk.",
+                "operationId": "reload_fixtures_v1_0__reload_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/alerts": {
+            "get": {
+                "summary": "Get Defender Alerts",
+                "description": "GET /api/alerts \u2014 return Defender security alerts.",
+                "operationId": "get_defender_alerts_api_alerts_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/apps": {
+            "get": {
+                "summary": "Get Defender Apps",
+                "description": "GET /api/apps \u2014 return discovered applications.",
+                "operationId": "get_defender_apps_api_apps_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/deviceavinfo": {
+            "get": {
+                "summary": "Get Defender Deviceavinfo",
+                "description": "GET /api/deviceavinfo \u2014 return device antivirus status.",
+                "operationId": "get_defender_deviceavinfo_api_deviceavinfo_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/machines/{machine_id}/recommendations": {
+            "get": {
+                "summary": "Get Defender Recommendations",
+                "description": "GET /api/machines/{machine_id}/recommendations \u2014 return security recommendations per device.",
+                "operationId": "get_defender_recommendations_api_machines__machine_id__recommendations_get",
+                "parameters": [
+                    {
+                        "name": "machine_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Machine Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/machines/{machine_id}/vulnerabilities": {
+            "get": {
+                "summary": "Get Defender Vulnerabilities",
+                "description": "GET /api/machines/{machine_id}/vulnerabilities \u2014 return CVE objects per device.",
+                "operationId": "get_defender_vulnerabilities_api_machines__machine_id__vulnerabilities_get",
+                "parameters": [
+                    {
+                        "name": "machine_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Machine Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/policies/appcontrol": {
+            "get": {
+                "summary": "Get Defender Appcontrol",
+                "description": "GET /api/policies/appcontrol \u2014 return WDAC/AppLocker policies.",
+                "operationId": "get_defender_appcontrol_api_policies_appcontrol_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/vulnerabilities/machinesVulnerabilities": {
+            "get": {
+                "summary": "Get Defender Machine Vulnerabilities",
+                "description": "GET /api/vulnerabilities/machinesVulnerabilities \u2014 return all machine vulnerabilities.",
+                "operationId": "get_defender_machine_vulnerabilities_api_vulnerabilities_machinesVulnerabilities_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/beta/{path}": {
+            "put": {
+                "summary": "Beta Route",
+                "description": "Mirror /v1.0/ routes under /beta/ with context URL rewriting.\n\nThis catch-all handler maps /beta/{path} to the /v1.0/{path} fixtures,\nwith @odata.context URLs rewritten from v1.0 to beta.\n\nBeta-specific fixtures are checked first (in fixtures[\"beta/{fixture_name}\"]).\nIf not found, falls back to v1.0 fixtures (in fixtures[\"{fixture_name}\"]).\n\nSupports all query parameters ($top, $filter, $expand) and write operations\n(POST, PATCH) with the same behavior as v1.0 routes.",
+                "operationId": "beta_route_beta__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Beta Route",
+                "description": "Mirror /v1.0/ routes under /beta/ with context URL rewriting.\n\nThis catch-all handler maps /beta/{path} to the /v1.0/{path} fixtures,\nwith @odata.context URLs rewritten from v1.0 to beta.\n\nBeta-specific fixtures are checked first (in fixtures[\"beta/{fixture_name}\"]).\nIf not found, falls back to v1.0 fixtures (in fixtures[\"{fixture_name}\"]).\n\nSupports all query parameters ($top, $filter, $expand) and write operations\n(POST, PATCH) with the same behavior as v1.0 routes.",
+                "operationId": "beta_route_beta__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Beta Route",
+                "description": "Mirror /v1.0/ routes under /beta/ with context URL rewriting.\n\nThis catch-all handler maps /beta/{path} to the /v1.0/{path} fixtures,\nwith @odata.context URLs rewritten from v1.0 to beta.\n\nBeta-specific fixtures are checked first (in fixtures[\"beta/{fixture_name}\"]).\nIf not found, falls back to v1.0 fixtures (in fixtures[\"{fixture_name}\"]).\n\nSupports all query parameters ($top, $filter, $expand) and write operations\n(POST, PATCH) with the same behavior as v1.0 routes.",
+                "operationId": "beta_route_beta__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Beta Route",
+                "description": "Mirror /v1.0/ routes under /beta/ with context URL rewriting.\n\nThis catch-all handler maps /beta/{path} to the /v1.0/{path} fixtures,\nwith @odata.context URLs rewritten from v1.0 to beta.\n\nBeta-specific fixtures are checked first (in fixtures[\"beta/{fixture_name}\"]).\nIf not found, falls back to v1.0 fixtures (in fixtures[\"{fixture_name}\"]).\n\nSupports all query parameters ($top, $filter, $expand) and write operations\n(POST, PATCH) with the same behavior as v1.0 routes.",
+                "operationId": "beta_route_beta__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Beta Route",
+                "description": "Mirror /v1.0/ routes under /beta/ with context URL rewriting.\n\nThis catch-all handler maps /beta/{path} to the /v1.0/{path} fixtures,\nwith @odata.context URLs rewritten from v1.0 to beta.\n\nBeta-specific fixtures are checked first (in fixtures[\"beta/{fixture_name}\"]).\nIf not found, falls back to v1.0 fixtures (in fixtures[\"{fixture_name}\"]).\n\nSupports all query parameters ($top, $filter, $expand) and write operations\n(POST, PATCH) with the same behavior as v1.0 routes.",
+                "operationId": "beta_route_beta__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{path}": {
+            "put": {
+                "summary": "Catch All",
+                "description": "Catch-all 404 handler for unmapped paths.",
+                "operationId": "catch_all__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Catch All",
+                "description": "Catch-all 404 handler for unmapped paths.",
+                "operationId": "catch_all__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Catch All",
+                "description": "Catch-all 404 handler for unmapped paths.",
+                "operationId": "catch_all__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Catch All",
+                "description": "Catch-all 404 handler for unmapped paths.",
+                "operationId": "catch_all__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Catch All",
+                "description": "Catch-all 404 handler for unmapped paths.",
+                "operationId": "catch_all__path__put",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Path"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    },
+                    "input": {
+                        "title": "Input"
+                    },
+                    "ctx": {
+                        "type": "object",
+                        "title": "Context"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
