@@ -4,7 +4,7 @@
 
 ## Project Context
 
-**m365-sim** is a Microsoft Graph API simulation platform. It is a **single-file FastAPI server** (`server.py`) that serves static JSON fixtures representing M365 tenant states. No database, no ORM, no package structure beyond the repo root.
+**m365-sim** is a Microsoft Graph API simulation platform. It is a **single-file FastAPI server** (`server.py`) that serves static JSON fixtures representing M365 tenant states. No database, no ORM; `builder/`, `sdk/` and `oscal/` are small helper packages beside it.
 
 **Consumer**: CMMC compliance assessment tools that deserialize responses into typed structs, so fixture JSON shapes must exactly match real Graph API responses.
 
@@ -13,25 +13,15 @@
 ```
 m365-sim/
 ├── server.py                          # Single-file FastAPI mock server
-├── scenarios/
-│   ├── gcc-moderate/
-│   │   ├── greenfield/*.json          # Fresh G5 tenant, no controls
-│   │   ├── hardened/*.json            # Post-remediation deploy
-│   │   └── partial/                   # v2
-│   └── gcc-high/
-│       └── greenfield/*.json          # Placeholder fixtures (TODO)
-├── builder/
-│   └── tenant_builder.py             # Fluent API for programmatic fixtures
-├── sdk/
-│   └── __init__.py                   # Package entry point
-├── tests/
-│   ├── conftest.py                   # Subprocess server fixture
-│   ├── test_server.py                # Greenfield endpoint tests
-│   ├── test_query_write_error.py     # Query params, writes, error sim
-│   ├── test_hardened.py              # Hardened scenario tests
-│   └── test_tenant_builder.py        # Builder tests
-├── docs/
-│   └── decisions.md                  # Design decision log
+├── scenarios/<cloud>/<scenario>/*.json  # clouds: gcc-moderate, gcc-high, commercial-e5
+│                                        # scenarios: greenfield, hardened, hardened-enforced, partial
+│                                        # (gcc-moderate also has beta/ subdirs)
+├── builder/tenant_builder.py          # Fluent API for programmatic fixtures
+├── sdk/                               # Package entry point
+├── oscal/                             # OSCAL component-definition generator
+├── scripts/smoke.sh                   # curl smoke script
+├── tests/                             # conftest.py (subprocess server fixtures) + one test_*.py per feature area
+├── docs/                              # decisions.md (design decision log), guide.md
 ├── pyproject.toml                    # deps: fastapi, uvicorn; dev group: pytest, httpx
 ├── uv.lock                           # locked resolution (commit it)
 ├── .python-version                   # default dev interpreter (3.14)
@@ -62,14 +52,14 @@ m365-sim/
 
 ### Fixtures
 - All JSON must include `@odata.context` matching real Graph API responses
-- GCC Moderate uses `graph.microsoft.com`, GCC High uses `graph.microsoft.us`
-- Greenfield tenant identity: **Contoso Defense LLC**, domain `contoso-defense.com`
-- Hardened CA policies MUST use `"state": "enabledForReportingButNotEnforced"` (never `"enabled"`)
+- GCC Moderate and Commercial E5 use `graph.microsoft.com`, GCC High uses `graph.microsoft.us`
+- Greenfield tenant identity per cloud: gcc-moderate **Contoso Defense LLC** (`contoso-defense.com`); gcc-high **Contoso Defense Federal LLC** (`contoso-defense.us`); commercial-e5 **Contoso Corp** (`contoso.com`)
+- `hardened` and `partial` CA policies MUST use `"state": "enabledForReportingButNotEnforced"` (never `"enabled"`); the `hardened-enforced` scenarios use `"enabled"` on purpose
 - Break-glass account ID: `00000000-0000-0000-0000-000000000011`
 
 ### Graph API Patterns
 - Use `(p.get("grantControls") or {}).get("builtInControls")` for nested access — `or {}` handles explicit null
-- `$top=N` truncates `value` array; `$filter`/`$select`/`$expand` are logged but ignored
+- `$top=N` truncates `value`. `$filter` and `$expand` are applied first (order: `$filter` → `$expand` → `$top`; unsupported `$filter` syntax is logged and returns the unfiltered set). `$select` is logged but ignored
 
 ### Testing
 - Tests use **subprocess server** — pytest fixture starts real server, tests hit real HTTP
@@ -119,7 +109,3 @@ uv export --locked --no-dev -o requirements.txt     # EXACT command; CI diffs th
 3. No TODO/FIXME in non-scaffold code: `grep -r "TODO\|FIXME" server.py tests/`
 4. Completion notes filled in DEVELOPMENT_PLAN.md
 5. Git commit with semantic message
-
----
-
-*Project: m365-sim | Updated: 2026-09-28*
